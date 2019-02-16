@@ -55,13 +55,13 @@ export default {
             this.container.$el.appendChild(this.$el);
             this.setListeners();
         },
-        hide() {
+        close() {
             this.$emit('close');
         },
         setListeners() {
             const closeOnEsc = (e) => {
                 if (this.show && e.key === 'Escape') {
-                    this.hide();
+                    this.close();
                 }
             };
 
@@ -75,7 +75,7 @@ export default {
 
     render() {
         return this.$scopedSlots.default({
-            hide: this.hide,
+            close: this.close,
         });
     },
 };

@@ -1,37 +1,39 @@
 <template>
-    <fade :show="show"
+    <renderless-modal :show="show"
         :portal="portal"
         v-on="$listeners">
-        <div slot-scope="{ hide }"
-            :class="['modal animated', { 'is-active': show }]"
-            v-if="show">
-            <div class="modal-background"/>
-            <div class="modal-card">
-                <header class="modal-card-head">
-                    <slot name="header"/>
-                </header>
-                <section class="modal-card-body">
-                    <slot name="body"/>
-                </section>
-                <footer class="modal-card-foot">
-                    <slot name="footer"/>
-                </footer>
+        <fade slot-scope="{ close }">
+            <div :class="['modal animated', { 'is-active': show }]"
+                v-if="show">
+                <div class="modal-background"/>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <slot name="header"/>
+                    </header>
+                    <section class="modal-card-body">
+                        <slot name="body"/>
+                    </section>
+                    <footer class="modal-card-foot">
+                        <slot name="footer"/>
+                    </footer>
+                </div>
+                <button class="modal-close is-large"
+                    aria-label="close"
+                    @click="close"/>
             </div>
-            <button class="modal-close is-large"
-                aria-label="close"
-                @click="hide"/>
-        </div>
-    </fade>
+        </fade>
+    </renderless-modal>
 </template>
 
 <script>
 
-import Fade from '../../transitions/Fade.vue';
+import { Fade } from '@enso-ui/transitions';
+import RenderlessModal from '../../renderless/Modal.vue';
 
 export default {
     name: 'Modal',
 
-    components: { Fade },
+    components: { RenderlessModal, Fade },
 
     props: {
         show: {
