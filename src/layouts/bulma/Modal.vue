@@ -3,7 +3,7 @@
         :portal="portal"
         v-on="$listeners">
         <fade slot-scope="{ close }">
-            <div :class="['modal animated', { 'is-active': show }]"
+            <div :class="['modal', { 'is-active': show }]"
                 v-if="show">
                 <div class="modal-background"/>
                 <div class="modal-content">
