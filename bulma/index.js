@@ -1,4 +1,4 @@
-import Modal from '../src/layouts/bulma/Modal.vue';
-import ModalCard from '../src/layouts/bulma/ModalCard.vue';
+import Modal from '../src/bulma/Modal.vue';
+import ModalCard from '../src/bulma/ModalCard.vue';
 
 export { Modal, ModalCard };

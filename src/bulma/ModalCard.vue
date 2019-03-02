@@ -1,5 +1,5 @@
 <template>
-    <renderless-modal :show="show"
+    <core-modal :show="show"
         :portal="portal"
         v-on="$listeners">
         <fade slot-scope="{ close }">
@@ -22,18 +22,17 @@
                     @click="close"/>
             </div>
         </fade>
-    </renderless-modal>
+    </core-modal>
 </template>
 
 <script>
-
 import { Fade } from '@enso-ui/transitions';
-import RenderlessModal from '../../renderless/Modal.vue';
+import CoreModal from '../renderless/Modal.vue';
 
 export default {
     name: 'Modal',
 
-    components: { RenderlessModal, Fade },
+    components: { CoreModal, Fade },
 
     props: {
         show: {
@@ -46,5 +45,4 @@ export default {
         },
     },
 };
-
 </script>
