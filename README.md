@@ -25,7 +25,7 @@ npm i @enso-ui/modal
 Import the desired component(s):
 ```js
 import { Modal } from '@enso-ui/modal/bulma';
-import { Modal } from '@enso-ui/modal/renderless';
+import { CoreModal } from '@enso-ui/modal/renderless';
 ```
 
 ## Exports
@@ -35,7 +35,7 @@ import { Modal } from '@enso-ui/modal/renderless';
 - `ModalCard`
 
 `@enso-ui/modal/renderless`:
-- `Modal`
+- `CoreModal`
 
 
 ## Contributions
