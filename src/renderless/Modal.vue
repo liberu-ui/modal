@@ -2,6 +2,8 @@
 import Vue from 'vue';
 
 export default {
+    name: 'CoreModal',
+
     props: {
         show: {
             type: Boolean,
