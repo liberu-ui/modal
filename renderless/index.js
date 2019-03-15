@@ -1,3 +1,3 @@
-import Modal from '../src/renderless/Modal.vue';
+import CoreModal from '../src/renderless/CoreModal.vue';
 
-export default Modal;
+export default CoreModal;

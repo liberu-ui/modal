@@ -27,7 +27,7 @@
 
 <script>
 import { Fade } from '@enso-ui/transitions';
-import CoreModal from '../renderless/Modal.vue';
+import CoreModal from '../renderless/CoreModal.vue';
 
 export default {
     name: 'Modal',
