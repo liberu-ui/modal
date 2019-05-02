@@ -45,10 +45,12 @@ export default {
         },
         createPortal() {
             const portal = new Vue({
-                render: renderElement => renderElement('div'),
+                render: renderEl => renderEl('div'),
             }).$mount();
 
-            document.body.appendChild(portal.$el);
+            document.body
+                .querySelector('div')
+                .appendChild(portal.$el);
 
             return portal;
         },
