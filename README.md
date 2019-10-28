@@ -16,27 +16,9 @@ The component can be used outside of the Enso ecosystem.
 
 For live examples and demos, you may visit [laravel-enso.com](https://www.laravel-enso.com)
 
-Check the full documentation at  [docs.laravel-enso.com](https://docs.laravel-enso.com).
+### Installation, Configuration & Usage
 
-### Installation
-```
-npm i @enso-ui/modal
-```
-Import the desired component(s):
-```js
-import { Modal } from '@enso-ui/modal/bulma';
-import { CoreModal } from '@enso-ui/modal/renderless';
-```
-
-## Exports
-
-`@enso-ui/modal/bulma`:
-- `Modal`
-- `ModalCard`
-
-`@enso-ui/modal/renderless`:
-- `CoreModal`
-
+Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/frontend/modal.html)
 
 ## Contributions
 
