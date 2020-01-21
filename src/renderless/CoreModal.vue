@@ -11,19 +11,13 @@ export default {
         },
         portal: {
             type: String,
-            required: true,
+            default: 'modals',
         },
     },
 
     data: () => ({
         container: null,
     }),
-
-    computed: {
-        portalSelector() {
-            return `.${this.portal}`;
-        },
-    },
 
     created() {
         this.setUp();
@@ -35,7 +29,7 @@ export default {
 
     methods: {
         setUp() {
-            const portal = document.querySelector(this.portalSelector);
+            const portal = document.querySelector(`.${this.portal}`);
 
             this.container = portal
                 ? portal.__vue__
@@ -59,21 +53,48 @@ export default {
             this.setListeners();
         },
         close() {
+            this.deregister();
             this.$emit('close');
         },
         setListeners() {
-            const closeOnEsc = (e) => {
-                if (this.show && e.key === 'Escape') {
-                    this.close();
-                }
-            };
+            this.register();
 
-            document.addEventListener('keydown', closeOnEsc);
+            const self = this;
+
+            document.addEventListener('keydown', self.closeOnEsc);
 
             this.$once('hook:destroyed', () => {
-                document.removeEventListener('keydown', closeOnEsc);
+                document.removeEventListener('keydown', self.closeOnEsc);
             });
         },
+        closeOnEsc(e) {
+            if (this.show && e.key === 'Escape' && this.isLast()) {
+                this.close();
+            }
+        },
+        register() {
+            const registered = this.registered();
+            registered.push(this._uid);
+           this.setBodyAttribute(registered);
+        },
+        deregister() {
+            const registered = this.registered();
+            registered.pop();
+            this.setBodyAttribute(registered);
+        },
+        isLast() {
+            const registered = this.registered();
+
+            return registered.indexOf(`${this._uid}`) === registered.length - 1;
+        },
+        registered() {
+            let registered = document.body.getAttribute('registered-modals') || "";
+
+            return registered.split(',').filter(modal => modal);
+        },
+        setBodyAttribute(registered) {
+            document.body.setAttribute('registered-modals', registered.join(','));
+        }
     },
 
     render() {

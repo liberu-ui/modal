@@ -1,6 +1,6 @@
 <template>
     <core-modal :show="show"
-        :portal="portal"
+        v-bind="$attrs"
         v-on="$listeners">
         <fade slot-scope="{ close }">
             <div :class="['modal', { 'is-active': show }]"
@@ -30,10 +30,6 @@ export default {
         show: {
             type: Boolean,
             required: true,
-        },
-        portal: {
-            type: String,
-            default: 'modals',
         },
     },
 };
