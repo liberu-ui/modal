@@ -59,12 +59,10 @@ export default {
         setListeners() {
             this.register();
 
-            const self = this;
-
-            document.addEventListener('keydown', self.closeOnEsc);
+            document.addEventListener('keydown', this.closeOnEsc);
 
             this.$once('hook:destroyed', () => {
-                document.removeEventListener('keydown', self.closeOnEsc);
+                document.removeEventListener('keydown', this.closeOnEsc);
             });
         },
         closeOnEsc(e) {
@@ -74,8 +72,9 @@ export default {
         },
         register() {
             const registered = this.registered();
+            // eslint-disable-next-line no-underscore-dangle
             registered.push(this._uid);
-           this.setBodyAttribute(registered);
+            this.setBodyAttribute(registered);
         },
         deregister() {
             const registered = this.registered();
@@ -84,17 +83,17 @@ export default {
         },
         isLast() {
             const registered = this.registered();
-
+            // eslint-disable-next-line no-underscore-dangle
             return registered.indexOf(`${this._uid}`) === registered.length - 1;
         },
         registered() {
-            let registered = document.body.getAttribute('registered-modals') || "";
+            const registered = document.body.getAttribute('registered-modals') || '';
 
             return registered.split(',').filter(modal => modal);
         },
         setBodyAttribute(registered) {
             document.body.setAttribute('registered-modals', registered.join(','));
-        }
+        },
     },
 
     render() {
