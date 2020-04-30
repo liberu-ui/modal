@@ -53,7 +53,6 @@ export default {
             this.setListeners();
         },
         close() {
-            this.deregister();
             this.$emit('close');
         },
         setListeners() {
@@ -101,5 +100,9 @@ export default {
             close: this.close,
         });
     },
+
+    beforeDestroy() {
+        this.deregister();
+    }
 };
 </script>
