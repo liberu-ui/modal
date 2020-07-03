@@ -1,10 +1,9 @@
 <template>
-    <core-modal :show="show"
+    <core-modal :transition-duration="transitionDuration"
         v-bind="$attrs"
         v-on="$listeners">
         <fade slot-scope="{ close }">
-            <div :class="['modal', { 'is-active': show }]"
-                v-if="show">
+            <div class="modal is-active">
                 <div class="modal-background"/>
                 <div class="modal-content">
                     <slot/>
@@ -27,9 +26,9 @@ export default {
     components: { CoreModal, Fade },
 
     props: {
-        show: {
-            type: Boolean,
-            required: true,
+        transitionDuration: {
+            type: Number,
+            default: 500,
         },
     },
 };

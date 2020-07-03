@@ -5,13 +5,13 @@ export default {
     name: 'CoreModal',
 
     props: {
-        show: {
-            type: Boolean,
-            required: true,
-        },
         portal: {
             type: String,
             default: 'modals',
+        },
+        transitionDuration: {
+            type: Number,
+            default: 0,
         },
     },
 
@@ -20,77 +20,78 @@ export default {
     }),
 
     created() {
-        this.setUp();
+        this.setUpPortal();
     },
 
     mounted() {
-        this.display();
+        this.show();
+    },
+
+    beforeDestroy() {
+        this.deregister();
+
+        setTimeout(() => {
+            if (this.$el.parentNode && this.$el.parentNode.className === this.portal) {
+                this.container.$el.removeChild(this.$el);
+            }
+        }, this.transitionDuration);
     },
 
     methods: {
-        setUp() {
-            const portal = document.querySelector(`.${this.portal}`);
-
-            this.container = portal
-                ? portal.__vue__
-                : this.createPortal();
-
-            this.container.$el.className = this.portal;
-        },
         createPortal() {
             const portal = new Vue({
                 render: renderEl => renderEl('div'),
             }).$mount();
 
-            document.body
-                .querySelector('div')
-                .appendChild(portal.$el);
+            document.body.querySelector('div').appendChild(portal.$el);
 
             return portal;
-        },
-        display() {
-            this.container.$el.appendChild(this.$el);
-            this.setListeners();
-        },
-        close() {
-            this.$emit('close');
-        },
-        setListeners() {
-            this.register();
-
-            document.addEventListener('keydown', this.closeOnEsc);
-
-            this.$once('hook:destroyed', () => {
-                document.removeEventListener('keydown', this.closeOnEsc);
-            });
-        },
-        closeOnEsc(e) {
-            if (this.show && e.key === 'Escape' && this.isLast()) {
-                this.close();
-            }
-        },
-        register() {
-            const registered = this.registered();
-            // eslint-disable-next-line no-underscore-dangle
-            registered.push(this._uid);
-            this.setBodyAttribute(registered);
         },
         deregister() {
             const registered = this.registered();
             registered.pop();
-            this.setBodyAttribute(registered);
+            this.updateBodyAttribute(registered);
+        },
+        close() {
+            this.$emit('close');
         },
         isLast() {
-            const registered = this.registered();
             // eslint-disable-next-line no-underscore-dangle
-            return registered.indexOf(`${this._uid}`) === registered.length - 1;
+            return this.registered().pop() === `${this._uid}`;
+        },
+        register() {
+            // eslint-disable-next-line no-underscore-dangle
+            this.updateBodyAttribute([...this.registered(), `${this._uid}`]);
         },
         registered() {
             const registered = document.body.getAttribute('registered-modals') || '';
 
             return registered.split(',').filter(modal => modal);
         },
-        setBodyAttribute(registered) {
+        setListeners() {
+            const closeOnEsc = e => (e.key === 'Escape'
+                && this.isLast() ? this.close() : null);
+
+            document.addEventListener('keydown', closeOnEsc);
+
+            this.$once('hook:destroyed', () => document
+                .removeEventListener('keydown', closeOnEsc));
+        },
+        setUpPortal() {
+            const portal = document.querySelector(`.${this.portal}`);
+
+            // eslint-disable-next-line no-underscore-dangle
+            this.container = portal ? portal.__vue__ : this.createPortal();
+
+            this.container.$el.className = this.portal;
+        },
+        show() {
+            this.register();
+            this.container.$el.appendChild(this.$el);
+            this.setListeners();
+            this.$emit('show');
+        },
+        updateBodyAttribute(registered) {
             document.body.setAttribute('registered-modals', registered.join(','));
         },
     },
@@ -98,11 +99,8 @@ export default {
     render() {
         return this.$scopedSlots.default({
             close: this.close,
+            visible: this.visible,
         });
     },
-
-    beforeDestroy() {
-        this.deregister();
-    }
 };
 </script>
