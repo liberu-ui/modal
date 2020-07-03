@@ -1,10 +1,9 @@
 <template>
-    <core-modal :show="show"
-        :portal="portal"
+    <core-modal :transition-duration="transitionDuration"
+        v-bind="$attrs"
         v-on="$listeners">
         <fade slot-scope="{ close }">
-            <div :class="['modal', { 'is-active': show }]"
-                v-if="show">
+            <div class="modal is-active">
                 <div class="modal-background"/>
                 <div class="modal-card">
                     <header class="modal-card-head">
@@ -35,13 +34,9 @@ export default {
     components: { CoreModal, Fade },
 
     props: {
-        show: {
-            type: Boolean,
-            required: true,
-        },
-        portal: {
-            type: String,
-            default: 'modals',
+        transitionDuration: {
+            type: Number,
+            default: 500,
         },
     },
 };
