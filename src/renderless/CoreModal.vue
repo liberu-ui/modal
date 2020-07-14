@@ -43,7 +43,7 @@ export default {
                 render: renderEl => renderEl('div'),
             }).$mount();
 
-            document.body.querySelector('div').appendChild(portal.$el);
+            this.$root.$el.appendChild(portal.$el);
 
             return portal;
         },
