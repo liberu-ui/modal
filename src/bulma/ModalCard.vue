@@ -1,8 +1,8 @@
 <template>
-    <core-modal :transition-duration="transitionDuration"
-        v-bind="$attrs"
+    <core-modal v-bind="$attrs"
+        :transition-duration="transitionDuration"
         v-on="$listeners">
-        <fade slot-scope="{ close }">
+        <fade v-slot="{ close }">
             <div class="modal is-active">
                 <div class="modal-background"/>
                 <div class="modal-card">
