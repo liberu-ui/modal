@@ -2,25 +2,28 @@
     <core-modal v-bind="$attrs"
         :transition-duration="transitionDuration"
         v-on="$listeners">
-        <fade v-slot="{ close }">
-            <div class="modal is-active">
-                <div class="modal-background"/>
-                <div class="modal-card">
-                    <header class="modal-card-head">
-                        <slot name="header"/>
-                    </header>
-                    <section class="modal-card-body">
-                        <slot name="body"/>
-                    </section>
-                    <footer class="modal-card-foot">
-                        <slot name="footer"/>
-                    </footer>
+        <template v-slot="{ close }">
+            <fade>
+                <div class="modal is-active">
+                    <div class="modal-background"/>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <slot name="header"/>
+                        </header>
+                        <section class="modal-card-body">
+                            <slot name="body"/>
+                        </section>
+                        <footer class="modal-card-foot">
+                            <slot name="footer"/>
+                        </footer>
+                    </div>
+                    <button class="modal-close is-large"
+                        aria-label="close"
+                        @click="close"/>
                 </div>
-                <button class="modal-close is-large"
-                    aria-label="close"
-                    @click="close"/>
-            </div>
-        </fade>
+            </fade>
+        </template>
+       
     </core-modal>
 </template>
 
