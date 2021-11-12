@@ -2,7 +2,7 @@
     <core-modal v-bind="$attrs"
         :transition-duration="transitionDuration"
         v-on="$listeners">
-        <template v-slot="{ close }">
+        <template #default="{ close }">
             <fade>
                 <div class="modal is-active">
                     <div class="modal-background"/>
