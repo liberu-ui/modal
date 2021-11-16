@@ -1,7 +1,6 @@
 <template>
     <core-modal v-bind="$attrs"
-        :transition-duration="transitionDuration"
-        v-on="$listeners">
+        :transition-duration="transitionDuration">
         <template #default="{ close }">
             <fade>
                 <div class="modal is-active">

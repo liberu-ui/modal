@@ -97,7 +97,7 @@ export default {
     },
 
     render() {
-        return this.$scopedSlots.default({
+        return this.$slots.default({
             close: this.close,
             visible: this.visible,
         });
