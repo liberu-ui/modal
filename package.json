@@ -1,6 +1,6 @@
 {
   "name": "@enso-ui/modal",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A simple Modal",
   "main": "index.js",
   "scripts": {
