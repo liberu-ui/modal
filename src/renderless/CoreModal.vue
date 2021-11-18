@@ -37,7 +37,16 @@ export default {
         }, this.transitionDuration);
     },
 
+    unmounted() {
+        document.removeEventListener('keydown', this.closeOnEsc);
+    },
+
     methods: {
+        closeOnEsc({ key }) {
+            if (key === 'Escape' && this.isLast()) {
+                this.close();
+            }
+        },
         createPortal() {
             const portal = new Vue({
                 render: renderEl => renderEl('div'),
@@ -68,14 +77,8 @@ export default {
 
             return registered.split(',').filter(modal => modal);
         },
-        setListeners() {
-            const closeOnEsc = e => (e.key === 'Escape'
-                && this.isLast() ? this.close() : null);
-
-            document.addEventListener('keydown', closeOnEsc);
-
-            this.$once('hook:destroyed', () => document
-                .removeEventListener('keydown', closeOnEsc));
+        setListener() {
+            document.addEventListener('keydown', this.closeOnEsc);
         },
         setUpPortal() {
             const portal = document.querySelector(`.${this.portal}`);
@@ -88,7 +91,7 @@ export default {
         show() {
             this.register();
             this.container.$el.appendChild(this.$el);
-            this.setListeners();
+            this.setListener();
             this.$emit('show');
         },
         updateBodyAttribute(registered) {
