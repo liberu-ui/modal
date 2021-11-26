@@ -27,7 +27,7 @@ export default {
         this.show();
     },
 
-    beforeDestroy() {
+    beforeUnmount() {
         this.deregister();
 
         setTimeout(() => {
