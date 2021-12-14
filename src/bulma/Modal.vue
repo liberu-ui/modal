@@ -1,20 +1,23 @@
 <template>
-    <fade>
-        <div class="modal is-active">
-            <div class="modal-background"/>
-            <div class="modal-content">
-                <slot/>
+    <teleport to="body">
+        <fade @after-enter="$emit('show')"
+            @after-leave="$emit('close')">
+            <div class="modal is-active"
+                v-if="visible">
+                <div class="modal-background"/>
+                <core-modal v-model:visible="visible">
+                    <template #default="{ close }">
+                        <div class="modal-content">
+                            <slot :close="close"/>
+                        </div>
+                        <button class="modal-close is-large"
+                            aria-label="close"
+                            @click="close"/>
+                    </template>
+                </core-modal>
             </div>
-            <core-modal v-bind="$attrs"
-                :transition-duration="transitionDuration">
-                <template #default="{ close }">
-                    <button class="modal-close is-large"
-                        aria-label="close"
-                        @click="close"/>
-                </template>
-            </core-modal>
-        </div>
-    </fade>
+        </fade>
+    </teleport>
 </template>
 
 <script>
@@ -26,11 +29,10 @@ export default {
 
     components: { CoreModal, Fade },
 
-    props: {
-        transitionDuration: {
-            type: Number,
-            default: 500,
-        },
-    },
+    emits: ['show', 'close'],
+
+    data: () => ({
+        visible: true,
+    })
 };
 </script>
