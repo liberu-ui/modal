@@ -3,6 +3,7 @@
         <fade @after-enter="$emit('show')"
             @after-leave="$emit('close')">
             <div class="modal is-active"
+                v-bind="$attrs"
                 v-if="visible">
                 <div class="modal-background"/>
                 <core-modal v-model:visible="visible">
