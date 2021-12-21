@@ -32,6 +32,8 @@ export default {
 
     emits: ['show', 'close'],
 
+    inheritAttrs: false,
+
     data: () => ({
         visible: true,
     })
