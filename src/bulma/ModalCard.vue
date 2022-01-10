@@ -42,8 +42,10 @@ export default {
 
     components: { CoreModal, Fade },
 
+    emits: ['close', 'show'],
+
     data: () => ({
         visible: true,
-    })
+    }),
 };
 </script>

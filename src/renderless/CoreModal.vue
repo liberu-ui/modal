@@ -2,14 +2,14 @@
 export default {
     name: 'CoreModal',
 
-    emits: ['update:visible'],
-
     props: {
         visible: {
             type: Boolean,
             required: true,
         },
     },
+
+    emits: ['update:visible'],
 
     mounted() {
         document.addEventListener('keydown', this.closeOnEsc);
@@ -27,7 +27,7 @@ export default {
         },
         close() {
             this.$emit('update:visible', false);
-        }
+        },
     },
 
     render() {

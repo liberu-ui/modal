@@ -30,12 +30,12 @@ export default {
 
     components: { CoreModal, Fade },
 
-    emits: ['show', 'close'],
-
     inheritAttrs: false,
+
+    emits: ['show', 'close'],
 
     data: () => ({
         visible: true,
-    })
+    }),
 };
 </script>
