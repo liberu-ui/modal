@@ -1,30 +1,36 @@
 <template>
-    <core-modal v-bind="$attrs"
-        :transition-duration="transitionDuration"
-        v-on="$listeners">
-        <template v-slot="{ close }">
-            <fade>
-                <div class="modal is-active">
-                    <div class="modal-background"/>
-                    <div class="modal-card">
-                        <header class="modal-card-head">
-                            <slot name="header"/>
-                        </header>
-                        <section class="modal-card-body">
-                            <slot name="body"/>
-                        </section>
-                        <footer class="modal-card-foot">
-                            <slot name="footer"/>
-                        </footer>
-                    </div>
-                    <button class="modal-close is-large"
-                        aria-label="close"
-                        @click="close"/>
-                </div>
-            </fade>
-        </template>
-       
-    </core-modal>
+    <teleport to="body">
+        <fade @after-enter="$emit('show')"
+            @after-leave="$emit('close')">
+            <div class="modal is-active"
+                 v-if="visible">
+                <div class="modal-background"/>
+                <core-modal v-model:visible="visible">
+                    <template #default="{ close }">
+                        <fade>
+                            <div class="modal-card">
+                                <header class="modal-card-head">
+                                    <slot name="header"
+                                        :close="close"/>
+                                </header>
+                                <section class="modal-card-body">
+                                    <slot name="body"
+                                        :close="close"/>
+                                </section>
+                                <footer class="modal-card-foot">
+                                    <slot name="footer"
+                                        :close="close"/>
+                                </footer>
+                            </div>
+                            <button class="modal-close is-large"
+                                aria-label="close"
+                                @click="close"/>
+                        </fade>
+                    </template>
+                </core-modal>
+            </div>
+        </fade>
+    </teleport>
 </template>
 
 <script>
@@ -32,15 +38,14 @@ import { Fade } from '@enso-ui/transitions';
 import CoreModal from '../renderless/CoreModal.vue';
 
 export default {
-    name: 'Modal',
+    name: 'ModalCard',
 
     components: { CoreModal, Fade },
 
-    props: {
-        transitionDuration: {
-            type: Number,
-            default: 500,
-        },
-    },
+    emits: ['close', 'show'],
+
+    data: () => ({
+        visible: true,
+    }),
 };
 </script>
