@@ -1,5 +1,5 @@
 {
-  "name": "@enso-ui/modal",
+  "name": "@cgdsoftware/modal",
   "version": "3.0.13",
   "description": "A simple Modal",
   "main": "index.js",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/enso-ui/modal#readme",
   "dependencies": {
-    "@enso-ui/transitions": "^2.0",
+    "@cgdsoftware/transitions": "^2.0",
     "bulma": "^0.9.0",
     "vue": "^3.0"
   },
