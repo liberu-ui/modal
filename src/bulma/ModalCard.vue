@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { Fade } from '@enso-ui/transitions';
+import { Fade } from '@liberu-ui/transitions';
 import CoreModal from '../renderless/CoreModal.vue';
 
 export default {
