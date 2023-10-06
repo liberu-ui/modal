@@ -1,6 +1,6 @@
 {
   "name": "@liberu-ui/modal",
-  "version": "3.0.15",
+  "version": "3.0.16",
   "description": "A simple Modal",
   "main": "index.js",
   "scripts": {
