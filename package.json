@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/enso-ui/modal.git"
+    "url": "git+https://github.com/liberu-ui/modal.git"
   },
   "keywords": [
     "modal",
@@ -18,9 +18,9 @@
   "author": "Adrian Ocneanu <aocneanu@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/enso-ui/modal/issues"
+    "url": "https://github.com/liberu-ui/modal/issues"
   },
-  "homepage": "https://github.com/enso-ui/modal#readme",
+  "homepage": "https://github.com/liberu-ui/modal#readme",
   "dependencies": {
     "@liberu-ui/transitions": "^2.0",
     "bulma": "^0.9.0",
